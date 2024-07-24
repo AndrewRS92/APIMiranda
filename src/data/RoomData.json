@@ -1,0 +1,401 @@
+[
+    {
+        "id": 1,
+        "name": "Room 101",
+        "images": ["./room1.jpg"],
+        "bedType": "Single Bed",
+        "price": 120,
+        "offerPrice": 96,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 2,
+        "name": "Room 102",
+        "images": ["./room2.jpg"],
+        "bedType": "Double Bed",
+        "price": 150,
+        "offerPrice": 120,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 3,
+        "name": "Room 103",
+        "images": ["./room3.jpg"],
+        "bedType": "Suite",
+        "price": 200,
+        "offerPrice": 160,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 4,
+        "name": "Room 104",
+        "images": ["./room4.jpg"],
+        "bedType": "Double Superior",
+        "price": 180,
+        "offerPrice": 144,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 5,
+        "name": "Room 105",
+        "images": ["./room5.jpg"],
+        "bedType": "Single Bed",
+        "price": 100,
+        "offerPrice": 80,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 6,
+        "name": "Room 106",
+        "images": ["./room6.jpg"],
+        "bedType": "Double Bed",
+        "price": 130,
+        "offerPrice": 104,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 7,
+        "name": "Room 107",
+        "images": ["./room7.jpg"],
+        "bedType": "Suite",
+        "price": 220,
+        "offerPrice": 176,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 8,
+        "name": "Room 108",
+        "images": ["./room8.jpg"],
+        "bedType": "Double Superior",
+        "price": 160,
+        "offerPrice": 128,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 9,
+        "name": "Room 109",
+        "images": ["./room9.jpg"],
+        "bedType": "Single Bed",
+        "price": 110,
+        "offerPrice": 88,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 10,
+        "name": "Room 110",
+        "images": ["./room10.jpg"],
+        "bedType": "Double Bed",
+        "price": 140,
+        "offerPrice": 112,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 11,
+        "name": "Room 111",
+        "images": ["./room11.jpg"],
+        "bedType": "Suite",
+        "price": 230,
+        "offerPrice": 184,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 12,
+        "name": "Room 112",
+        "images": ["./room12.jpg"],
+        "bedType": "Double Superior",
+        "price": 190,
+        "offerPrice": 152,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 13,
+        "name": "Room 113",
+        "images": ["./room13.jpg"],
+        "bedType": "Single Bed",
+        "price": 105,
+        "offerPrice": 84,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 14,
+        "name": "Room 114",
+        "images": ["./room14.jpg"],
+        "bedType": "Double Bed",
+        "price": 155,
+        "offerPrice": 124,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 15,
+        "name": "Room 115",
+        "images": ["./room15.jpg"],
+        "bedType": "Suite",
+        "price": 240,
+        "offerPrice": 192,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 16,
+        "name": "Room 116",
+        "images": ["./room16.jpg"],
+        "bedType": "Double Superior",
+        "price": 170,
+        "offerPrice": 136,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 17,
+        "name": "Room 117",
+        "images": ["./room17.jpg"],
+        "bedType": "Single Bed",
+        "price": 115,
+        "offerPrice": 92,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 18,
+        "name": "Room 118",
+        "images": ["./room18.jpg"],
+        "bedType": "Double Bed",
+        "price": 165,
+        "offerPrice": 132,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 19,
+        "name": "Room 119",
+        "images": ["./room19.jpg"],
+        "bedType": "Suite",
+        "price": 250,
+        "offerPrice": 200,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 20,
+        "name": "Room 120",
+        "images": ["./room20.jpg"],
+        "bedType": "Double Superior",
+        "price": 175,
+        "offerPrice": 140,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 21,
+        "name": "Room 121",
+        "images": ["./room21.jpg"],
+        "bedType": "Single Bed",
+        "price": 125,
+        "offerPrice": 100,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 22,
+        "name": "Room 122",
+        "images": ["./room22.jpg"],
+        "bedType": "Double Bed",
+        "price": 135,
+        "offerPrice": 108,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 23,
+        "name": "Room 123",
+        "images": ["./room23.jpg"],
+        "bedType": "Suite",
+        "price": 210,
+        "offerPrice": 168,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 24,
+        "name": "Room 124",
+        "images": ["./room24.jpg"],
+        "bedType": "Double Superior",
+        "price": 185,
+        "offerPrice": 148,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 25,
+        "name": "Room 125",
+        "images": ["./room25.jpg"],
+        "bedType": "Single Bed",
+        "price": 135,
+        "offerPrice": 108,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 26,
+        "name": "Room 126",
+        "images": ["./room26.jpg"],
+        "bedType": "Double Bed",
+        "price": 145,
+        "offerPrice": 116,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 27,
+        "name": "Room 127",
+        "images": ["./room27.jpg"],
+        "bedType": "Suite",
+        "price": 220,
+        "offerPrice": 176,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 28,
+        "name": "Room 128",
+        "images": ["./room28.jpg"],
+        "bedType": "Double Superior",
+        "price": 190,
+        "offerPrice": 152,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 29,
+        "name": "Room 129",
+        "images": ["./room29.jpg"],
+        "bedType": "Single Bed",
+        "price": 110,
+        "offerPrice": 88,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 30,
+        "name": "Room 130",
+        "images": ["./room30.jpg"],
+        "bedType": "Double Bed",
+        "price": 140,
+        "offerPrice": 112,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 31,
+        "name": "Room 131",
+        "images": ["./room31.jpg"],
+        "bedType": "Suite",
+        "price": 230,
+        "offerPrice": 184,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 32,
+        "name": "Room 132",
+        "images": ["./room32.jpg"],
+        "bedType": "Double Superior",
+        "price": 175,
+        "offerPrice": 140,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 33,
+        "name": "Room 133",
+        "images": ["./room33.jpg"],
+        "bedType": "Single Bed",
+        "price": 125,
+        "offerPrice": 100,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 34,
+        "name": "Room 134",
+        "images": ["./room34.jpg"],
+        "bedType": "Double Bed",
+        "price": 135,
+        "offerPrice": 108,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 35,
+        "name": "Room 135",
+        "images": ["./room35.jpg"],
+        "bedType": "Suite",
+        "price": 210,
+        "offerPrice": 168,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 36,
+        "name": "Room 136",
+        "images": ["./room36.jpg"],
+        "bedType": "Double Superior",
+        "price": 185,
+        "offerPrice": 148,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 37,
+        "name": "Room 137",
+        "images": ["./room37.jpg"],
+        "bedType": "Single Bed",
+        "price": 135,
+        "offerPrice": 108,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 38,
+        "name": "Room 138",
+        "images": ["./room38.jpg"],
+        "bedType": "Double Bed",
+        "price": 145,
+        "offerPrice": 116,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    },
+    {
+        "id": 39,
+        "name": "Room 139",
+        "images": ["./room39.jpg"],
+        "bedType": "Suite",
+        "price": 220,
+        "offerPrice": 176,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": true
+    },
+    {
+        "id": 40,
+        "name": "Room 140",
+        "images": ["./room40.jpg"],
+        "bedType": "Double Superior",
+        "price": 190,
+        "offerPrice": 152,
+        "facilities": ["AC", "Shower", "Double bed", "Towel", "Bathup", "Coffee Set", "LED TV", "Wifi"],
+        "available": false
+    }]

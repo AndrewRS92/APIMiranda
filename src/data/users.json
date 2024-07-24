@@ -1,0 +1,38 @@
+[
+    {
+        "id": "0",
+        "name": "Andrew Rojas",
+        "photo": "image.png",
+        "email": "adw@gmail.com",
+        "workstation": "manager",
+        "number_phone": "618292913",
+        "start_date": "27/08/2023",
+        "description": "Consectetur adipiscing elit", 
+        "state": true, 
+        "password": "1234"
+    },
+    {
+        "id": "1",
+        "photo": "image2.png",
+        "name": "Liliana Rojas",
+        "email": "lia@gmail.com",
+        "workstation": "room_service",
+        "number_phone": "666666666", 
+        "start_date": "27/01/2024",
+        "description": "Consectetur adipiscing elit", 
+        "state": true, 
+        "password": "1234"
+    },
+    {
+        "id": "2",
+        "photo": "image3.png",
+        "name": "Mirian Saldias",
+        "email": "mimi@gmail.com",
+        "workstation": "reception",
+        "number_phone": "666666666", 
+        "start_date": "10/01/2024",
+        "description": "Consectetur adipiscing elit", 
+        "state": false, 
+        "password": "1234"
+    }
+]

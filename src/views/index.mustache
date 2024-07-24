@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{test}}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    h2, h3 {
+      color: #333;
+    }
+    .container {
+      width: 80%;
+      margin: auto;
+      overflow: hidden;
+    }
+    .form-container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .form-container form {
+      display: flex;
+      justify-content: space-between;
+    }
+    .form-container form input, .form-container form button {
+      padding: 10px;
+      margin: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .form-container form button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    .form-container form button:hover {
+      background-color: #218838;
+    }
+    .links {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+    .links div {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 22%;
+    }
+    .links h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .links ul {
+      list-style: none;
+      padding: 0;
+    }
+    .links ul li {
+      margin: 5px 0;
+    }
+    .links ul li a {
+      text-decoration: none;
+      color: #007bff;
+      font-weight: bold;
+    }
+    .links ul li a:hover {
+      color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2 style="text-align: center;">{{title}}</h2>
+    <div class="form-container">
+      <form method="post" action="/login">
+        <input type="email" name="email" value="adw@gmail.com"/>
+        <input type="password" name="password" value="1234"/>
+        <button type="submit">Login</button>
+      </form>
+      <form method="post" action="/logout">
+        <button type="submit">Logout</button>
+      </form>
+    </div>
+    <div class="links">
+      <div>
+        <h3>Rooms</h3>
+        <ul>
+          <li><a href="/rooms">All Rooms</a></li>
+          <li><a href="/rooms/1">Room #1</a></li>
+          <li><a href="/rooms/2">Room #2</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Bookings</h3>
+        <ul>
+          <li><a href="/bookings">All Bookings</a></li>
+          <li><a href="/bookings/1">Booking #1</a></li>
+          <li><a href="/bookings/2">Booking #2</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Users</h3>
+        <ul>
+          <li><a href="/users">All Users</a></li>
+          <li><a href="/users/1">User #1</a></li>
+          <li><a href="/users/2">User #2</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Comments</h3>
+        <ul>
+          <li><a href="/comments">All Comments</a></li>
+          <li><a href="/comments/1">Comment #1</a></li>
+          <li><a href="/comments/2">Comment #2</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
