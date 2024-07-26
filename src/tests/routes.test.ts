@@ -1,8 +1,8 @@
 import request from 'supertest';
-import app from '../app'; // Ajusta la ruta según tu estructura de proyecto
+import app from '../app'; 
 import users from '../data/users.json';
 import rooms from '../data/RoomData.json';
-import comments from '../data/CommentsData.json'; // Asegúrate de que esta ruta sea correcta
+import comments from '../data/CommentsData.json'; 
 
 describe('Routes to GET all elements Json with authorization', () => {
   let cookie: string | null = null;
@@ -22,7 +22,6 @@ describe('Routes to GET all elements Json with authorization', () => {
     }
   });
 
-  // Verificar que no se puede acceder sin estar logueado
   it('should return 401 for accessing rooms without authorization', async () => {
     const res = await request(app)
       .get('/rooms');
@@ -44,7 +43,6 @@ describe('Routes to GET all elements Json with authorization', () => {
     expect(res.status).toBe(401);
   });
 
-  // Verificar que se puede acceder estando logueado
   it('should return a Json with rooms trying to get all Rooms when logged in', async () => {
     const res = await request(app)
       .get('/rooms')
@@ -72,10 +70,10 @@ describe('Routes to GET all elements Json with authorization', () => {
     expect(res.body).toEqual(comments); 
   });
 
-  // Verificar acceso a elementos específicos
+ 
   it('should return a Json with a specific user when logged in', async () => {
     const res = await request(app)
-      .get(`/users/${users[0].id}`) // Ajusta el campo de ID según tus datos
+      .get(`/users/${users[0].id}`) 
       .set('Cookie', cookie as string);
 
     expect(res.status).toBe(200);
@@ -84,7 +82,7 @@ describe('Routes to GET all elements Json with authorization', () => {
 
   it('should return a Json with a specific comment when logged in', async () => {
     const res = await request(app)
-      .get(`/comments/${comments[0].id}`) // Ajusta el campo de ID según tus datos
+      .get(`/comments/${comments[0].id}`) 
       .set('Cookie', cookie as string);
 
     expect(res.status).toBe(200);
@@ -93,14 +91,14 @@ describe('Routes to GET all elements Json with authorization', () => {
 
   it('should return a Json with a specific room when logged in', async () => {
     const res = await request(app)
-      .get(`/rooms/${rooms[0].id}`) // Ajusta el campo de ID según tus datos
+      .get(`/rooms/${rooms[0].id}`) 
       .set('Cookie', cookie as string);
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual(rooms[0]); 
   });
 
-  // Verificar que no se puede acceder a elementos específicos sin estar logueado
+  
   it('should return 401 for trying to get a specific room without authorization', async () => {
     const res = await request(app).get(`/rooms/${rooms[0].id}`);
     expect(res.status).toBe(401);
