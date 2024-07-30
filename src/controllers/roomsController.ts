@@ -1,18 +1,44 @@
-import express from 'express';
-import Room from '../services/Room';
+import { Router, Request, Response, NextFunction } from 'express';
+import Room from '../models/Rooms';
 
-const router = express.Router();
+const router = Router();
 
-router.get('/', (_req, res, _next) => {
-  const rooms = Room.fetchAll();
-  return res.json(rooms);
-});
-router.get('/:id', (req, res, next) => {
-  const room = Room.fetchOne(Number(req.params.id));
-  if (!room) {
-    next (res.status(404).json({ message: 'room not found' }));
+router.get('/:id', async (req: Request, res: Response, _next: NextFunction) => {
+  const id = req.params.id;
+  try {
+    const room = await Room.findById(id);
+    if (room) {
+      return res.status(200).json(room);
+    } else {
+      return res.status(404).json({ message: `Room with id ${id} not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: `Error fetching room #${id}`, error });
   }
-  res.json(room);
 });
 
-export default router; 
+router.post('/create', async (req: Request, res: Response, _next: NextFunction) => {
+  const roomData = req.body;
+  try {
+    const newRoom = await Room.create(roomData);
+    return res.status(201).json(newRoom);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error adding new room', error });
+  }
+});
+
+router.delete('/:id', async (req: Request, res: Response, _next: NextFunction) => {
+  const id = req.params.id;
+  try {
+    const deletedRoom = await Room.findByIdAndDelete(id);
+    if (deletedRoom) {
+      return res.status(200).json(deletedRoom);
+    } else {
+      return res.status(404).json({ message: `Room with id ${id} not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Error deleting room', error });
+  }
+});
+
+export default router;

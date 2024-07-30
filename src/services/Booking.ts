@@ -1,4 +1,5 @@
 import Booking from '../models/Booking';
+import {Booking as Ibooking}  from '../interfaces/booking';
 
 class BookingService {
   async createBooking(bookingData: any) {
@@ -7,19 +8,19 @@ class BookingService {
   }
 
   async getBookings() {
-    return await Booking.find().populate('roomid');
+    return await Booking.find().exec()
   }
 
   async getBookingById(id: string) {
-    return await Booking.findById(id).populate('roomid');
+    return await Booking.findById(id).exec()
   }
 
-  async updateBooking(id: string, updateData: any) {
-    return await Booking.findByIdAndUpdate(id, updateData, { new: true });
+  async updateBooking(id: string, updateData: Partial<Ibooking>) {
+    return await Booking.findByIdAndUpdate(id,updateData, {new:true}).exec();
   }
 
   async deleteBooking(id: string) {
-    return await Booking.findByIdAndDelete(id);
+    return await Booking.findByIdAndDelete(id).exec();
   }
 }
 

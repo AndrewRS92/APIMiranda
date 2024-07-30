@@ -1,40 +1,76 @@
-import express from 'express';
-import BookingService from '../services/Booking';
+import { Router, Request, Response, NextFunction } from 'express';
+import Booking from '../services/Booking';
 
-const router = express.Router();
+ export const bookingController = Router();
 
-router.get('/', (_req, res) => {
-  const bookings = BookingService.fetchAll();
-  res.json(bookings);
-});
+ bookingController.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
 
-router.get('/:id', (req, res, next) => {
-  const booking = BookingService.fetchOne(Number(req.params.id));
-  if (!booking) {
-    next (res.status(404).json({ message: 'Booking not found' }));
+  try {
+    const booking = await Booking.getBookings();
+    if (booking) {
+      return res.status(200).json(booking);
+    } else {
+      return res.status(404).json({ message: `bookings not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: `Error fetching bookings`, error });
   }
-  res.json(booking);
 });
 
-// router.post('/', (req, res) => {
-//   const newBooking = BookingService.create(req.body);
-//   res.status(201).json(newBooking);
-// });
 
-// router.put('/:id', (req, res) => {
-//   const updatedBooking = BookingService.update(Number(req.params.id), req.body);
-//   if (!updatedBooking) {
-//     return res.status(404).json({ message: 'Booking not found' });
-//   }
-//   res.json(updatedBooking);
-// });
 
-// router.delete('/:id', (req, res) => {
-//   const success = BookingService.delete(Number(req.params.id));
-//   if (!success) {
-//     return res.status(404).json({ message: 'Booking not found' });
-//   }
-//   res.status(204).send();
-// });
 
-export default router;
+bookingController.get('/:id', async (req: Request, res: Response, _next: NextFunction) => {
+  const id = req.params.id;
+  try {
+    const booking = await Booking.getBookingById(id);
+    if (booking) {
+      return res.status(200).json(booking);
+    } else {
+      return res.status(404).json({ message: `booking with id ${id} not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: `Error fetching booking #${id}`, error });
+  }
+});
+
+bookingController.post('/create', async (req: Request, res: Response, _next: NextFunction) => {
+  const bookingData = req.body;
+  try {
+    const newbooking = await Booking.createBooking(bookingData);
+    return res.status(201).json(newbooking);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error adding new booking', error });
+  }
+});
+
+bookingController.put('/update/:id', async (req: Request, res: Response, _next: NextFunction) => {
+  const id = req.params.id;
+  const data = req.body;
+  try {
+    const deletedbooking = await Booking.updateBooking(id,data);
+    if (deletedbooking) {
+      return res.status(200).json(deletedbooking);
+    } else {
+      return res.status(404).json({ message: `booking with id ${id} not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Error deleting booking', error });
+  }
+});
+
+
+
+bookingController.delete('/delete/:id', async (req: Request, res: Response, _next: NextFunction) => {
+  const id = req.params.id;
+  try {
+    const deletedbooking = await Booking.deleteBooking(id);
+    if (deletedbooking) {
+      return res.status(200).json(deletedbooking);
+    } else {
+      return res.status(404).json({ message: `booking with id ${id} not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Error deleting booking', error });
+  }
+});

@@ -1,41 +1,25 @@
-import express, { Request, Response } from 'express';
-import UserService from '../services/User';
+import { Router, Request, Response, NextFunction } from 'express';
+import User from '../models/User';
 
-const router = express.Router();
+const router = Router();
 
-router.get('/', (_req, res) => {
-  const users = UserService.fetchAll();
-  res.json(users);
-});
-
-router.get('/:id', (req: Request, res: Response, next) => {
-  const user = UserService.fetchOne(req.params.id);
-  if (!user) {
-    next(res.status(404).json({ message: 'User not found' })) ;
+router.post('/create', async (req: Request, res: Response, _next: NextFunction) => {
+  const userData = req.body;
+  try {
+    const newUser = await User.create(userData);
+    return res.status(201).json(newUser);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error creating user', error });
   }
-  res.json(user);
 });
 
-// router.post('/', (req, res) => {
-//   const newUser = UserService.create(req.body);
-//   res.status(201).json(newUser);
-// });
-
-// router.put('/:id', (req: Request , res: Response) => {
-//   const updatedUser = UserService.update(req.params.id, req.body);
-//   if (!updatedUser) {
-//     return res.status(404).json({ message: 'User not found' });
-//   }
-//   res.json(updatedUser);
-// });
-
-// router.delete('/:id', (req, res) => {
-//   const success = UserService.delete(req.params.id);
-//   if (!success) {
-//     return res.status(404).json({ message: 'User not found' });
-//   }
-//   res.status(204).send();
-// });
+router.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+  try {
+    const users = await User.find();
+    return res.status(200).json(users);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error fetching users', error });
+  }
+});
 
 export default router;
-
