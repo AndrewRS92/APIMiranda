@@ -1,37 +1,30 @@
-import { User } from '../interfaces/user';
-import usersData from '../data/users.json';
+import User from '../models/User';
 
-export default class UserService {
-  static fetchAll(): User[] {
-    return usersData;
+class UserService {
+  async createUser(userData: any) {
+    const user = new User(userData);
+    return await user.save();
   }
 
-  static fetchOne(id: string): User | undefined {
-    return usersData.find(user => user.id === id);
+  async getUsers() {
+    return await User.find();
   }
 
-//   static create(user: User): User {
-//     const newUser = { ...user, id: (usersData.length + 1).toString() };
-//     usersData.push(newUser);
-//     return newUser;
-//   }
+  async getUserById(id: string) {
+    return await User.findById(id);
+  }
 
-//   static update(id: string, updatedUser: Partial<User>): User | undefined {
-//     const userIndex = usersData.findIndex(user => user.id === id);
-//     if (userIndex === -1) {
-//       return undefined;
-//     }
-//     const updated = { ...usersData[userIndex], ...updatedUser };
-//     usersData[userIndex] = updated;
-//     return updated;
-//   }
+  async getUserByEmail(email: string) {
+    return await User.findOne({ email });
+  }
 
-//   static delete(id: string): boolean {
-//     const userIndex = usersData.findIndex(user => user.id === id);
-//     if (userIndex === -1) {
-//       return false;
-//     }
-//     usersData.splice(userIndex, 1);
-//     return true;
-//   }
+  async updateUser(id: string, updateData: any) {
+    return await User.findByIdAndUpdate(id, updateData, { new: true });
+  }
+
+  async deleteUser(id: string) {
+    return await User.findByIdAndDelete(id);
+  }
 }
+
+export default new UserService();
