@@ -1,4 +1,4 @@
-import { Schema, model, Document } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 interface IUser extends Document {
@@ -27,24 +27,14 @@ const userSchema = new Schema<IUser>({
 });
 
 // Middleware para encriptar la contraseña antes de guardarla
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) {
-    return next();
-  }
-  try {
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (err) {
-    next(err as Error);
-  }
+userSchema.pre<IUser>('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
 });
 
-// Método para comparar la contraseña ingresada con la encriptada
-userSchema.methods.comparePassword = async function (candidatePassword: string) {
-  return await bcrypt.compare(candidatePassword, this.password);
-};
 
-const User = model<IUser>('User', userSchema);
+const User = mongoose.model<IUser>('User', userSchema);
 
 export default User;

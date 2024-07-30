@@ -1,6 +1,5 @@
 import User from '../models/User';
-import UserService from './User';
-
+const bcrypt = require ("bcrypt");
 class AuthService {
   async register(userData: any) {
     const user = new User(userData);
@@ -8,13 +7,22 @@ class AuthService {
   }
 
   async login(email: string, password: string) {
-    const user = await UserService.getUserByEmail(email);
-    if (user && await user.comparePassword(password)) {
-      // Aquí puedes generar y devolver un token de autenticación (por ejemplo, JWT)
-      return { message: 'Login successful', userId: user._id };
-    } else {
-      throw new Error('Invalid email or password');
+    const user = await User.findOne({ email });
+    if (!user) {
+      console.log('User not found');
+      throw new Error('User not found');
     }
+    
+    console.log('User found:', user); // Log para verificar el usuario encontrado
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log('Password match:', isMatch); // Log para verificar la comparación de contraseñas
+
+    if (!isMatch) {
+      throw new Error('Invalid password');
+    }
+
+    return { message: 'Login successful', userId: user._id };
   }
 }
 

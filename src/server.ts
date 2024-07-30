@@ -6,7 +6,7 @@ import RoomService from './services/Room';
 import BookingService from './services/Booking';
 import UserService from './services/User';
 import CommentService from './services/Comment';
-import AuthService from './services/AuthService';
+import authRoutes from './routes/auth'; // Importar las rutas de autenticación
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -100,7 +100,7 @@ app.get('/users', async (_req, res) => {
 });
 
 // Rutas para Comment
-app.post('/comments', async (req, res) => {
+app.post('/postcomments', async (req, res) => {
   try {
     const savedComment = await CommentService.createComment(req.body);
     res.status(201).json(savedComment);
@@ -126,32 +126,8 @@ app.get('/comments', async (_req, res) => {
   }
 });
 
-// Rutas de Autenticación
-app.post('/register', async (req, res) => {
-  try {
-    const newUser = await AuthService.register(req.body);
-    res.status(201).json(newUser);
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(400).json({ error: error.message });
-    } else {
-      res.status(400).json({ error: 'Unknown error occurred' });
-    }
-  }
-});
-
-app.post('/login', async (req, res) => {
-  try {
-    const result = await AuthService.login(req.body.email, req.body.password);
-    res.status(200).json(result);
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(400).json({ error: error.message });
-    } else {
-      res.status(400).json({ error: 'Unknown error occurred' });
-    }
-  }
-});
+// Usar las rutas de autenticación
+app.use('/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

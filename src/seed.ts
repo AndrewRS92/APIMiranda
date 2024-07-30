@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { faker } from '@faker-js/faker';
-
 import Room from './models/Rooms';
 import Booking from './models/Booking';
 import User from './models/User';
@@ -51,6 +50,7 @@ const seedBookings = async () => {
 
 const seedUsers = async () => {
   for (let i = 0; i < 10; i++) {
+    const hashedPassword = faker.internet.password();
     const user = new User({
       name: faker.person.fullName(),
       photo: faker.image.avatar(),
@@ -60,10 +60,26 @@ const seedUsers = async () => {
       start_date: faker.date.past(),
       description: faker.lorem.sentence(),
       state: faker.datatype.boolean(),
-      password: faker.internet.password(),
+      password: hashedPassword,
     });
     await user.save();
   }
+
+  // Crear el usuario específico
+  const examplePassword = "1234";
+  const specificUser = new User({
+    name: 'Admin User',
+    photo: faker.image.avatar(),
+    email: 'adw@gmail.com',
+    workstation: 'Administrator',
+    number_phone: faker.phone.number(),
+    start_date: faker.date.past(),
+    description: 'This is a predefined admin user.',
+    state: true,
+    password: examplePassword,
+  });
+  await specificUser.save();
+
   console.log('Users seeded');
 };
 
