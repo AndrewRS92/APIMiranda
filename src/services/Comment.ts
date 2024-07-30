@@ -1,37 +1,26 @@
-import { Comment } from '../interfaces/comment';
-import commentsData from '../data/CommentsData.json';
+import Comment from '../models/CommentsData';
 
-export default class CommentService {
-  static fetchAll(): Comment[] {
-    return commentsData;
+class CommentService {
+  async createComment(commentData: any) {
+    const comment = new Comment(commentData);
+    return await comment.save();
   }
 
-  static fetchOne(id: number): Comment | undefined {
-    return commentsData.find(comment => comment.id === id);
+  async getComments() {
+    return await Comment.find();
   }
 
-  static create(comment: Comment): Comment {
-    const newComment = { ...comment, id: commentsData.length + 1 };
-    commentsData.push(newComment);
-    return newComment;
+  async getCommentById(id: string) {
+    return await Comment.findById(id);
   }
 
-  static update(id: number, updatedComment: Partial<Comment>): Comment | undefined {
-    const commentIndex = commentsData.findIndex(comment => comment.id === id);
-    if (commentIndex === -1) {
-      return undefined;
-    }
-    const updated = { ...commentsData[commentIndex], ...updatedComment };
-    commentsData[commentIndex] = updated;
-    return updated;
+  async updateComment(id: string, updateData: any) {
+    return await Comment.findByIdAndUpdate(id, updateData, { new: true });
   }
 
-  static delete(id: number): boolean {
-    const commentIndex = commentsData.findIndex(comment => comment.id === id);
-    if (commentIndex === -1) {
-      return false;
-    }
-    commentsData.splice(commentIndex, 1);
-    return true;
+  async deleteComment(id: string) {
+    return await Comment.findByIdAndDelete(id);
   }
 }
+
+export default new CommentService();

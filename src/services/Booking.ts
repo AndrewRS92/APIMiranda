@@ -1,37 +1,26 @@
-import { Booking } from '../interfaces/booking';
-import bookingsData from '../data/BookingsData.json';
+import Booking from '../models/Booking';
 
-export default class BookingService {
-  static fetchAll(): Booking[] {
-    return bookingsData;
+class BookingService {
+  async createBooking(bookingData: any) {
+    const booking = new Booking(bookingData);
+    return await booking.save();
   }
 
-  static fetchOne(id: number): Booking | undefined {
-    return bookingsData.find(booking => booking.id === id);
+  async getBookings() {
+    return await Booking.find().populate('roomid');
   }
 
-  static create(booking: Booking): Booking {
-    const newBooking = { ...booking, id: bookingsData.length + 1 };
-    bookingsData.push(newBooking);
-    return newBooking;
+  async getBookingById(id: string) {
+    return await Booking.findById(id).populate('roomid');
   }
 
-  static update(id: number, updatedBooking: Partial<Booking>): Booking | undefined {
-    const bookingIndex = bookingsData.findIndex(booking => booking.id === id);
-    if (bookingIndex === -1) {
-      return undefined;
-    }
-    const updated = { ...bookingsData[bookingIndex], ...updatedBooking };
-    bookingsData[bookingIndex] = updated;
-    return updated;
+  async updateBooking(id: string, updateData: any) {
+    return await Booking.findByIdAndUpdate(id, updateData, { new: true });
   }
 
-  static delete(id: number): boolean {
-    const bookingIndex = bookingsData.findIndex(booking => booking.id === id);
-    if (bookingIndex === -1) {
-      return false;
-    }
-    bookingsData.splice(bookingIndex, 1);
-    return true;
+  async deleteBooking(id: string) {
+    return await Booking.findByIdAndDelete(id);
   }
 }
+
+export default new BookingService();
