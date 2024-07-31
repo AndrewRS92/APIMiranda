@@ -1,40 +1,72 @@
-import express from 'express';
+import { Router, Request, Response, NextFunction } from 'express';
 import CommentService from '../services/Comment';
 
-const router = express.Router();
+const commentController = Router();
 
-router.get('/', (_req, res) => {
-  const comments = CommentService.fetchAll();
-  res.json(comments);
-});
-
-router.get('/:id', (req, res, next) => {
-  const comment = CommentService.fetchOne(Number(req.params.id));
-  if (!comment) {
-    next (res.status(404).json({ message: 'Comment not found' })) ;
+commentController.get('/', async (_req: Request, res: Response, _next: NextFunction) => {
+  try {
+    const comments = await CommentService.getComments();
+    if (comments) {
+      return res.status(200).json(comments);
+    } else {
+      return res.status(404).json({ message: `Comments not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: `Error fetching comments`, error });
   }
-  res.json(comment);
 });
 
-// router.post('/', (req, res) => {
-//   const newComment = CommentService.create(req.body);
-//   res.status(201).json(newComment);
-// });
+commentController.get('/:id', async (req: Request, res: Response, _next: NextFunction) => {
+  const id = req.params.id;
+  try {
+    const comment = await CommentService.getCommentById(id);
+    if (comment) {
+      return res.status(200).json(comment);
+    } else {
+      return res.status(404).json({ message: `Comment with id ${id} not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: `Error fetching comment #${id}`, error });
+  }
+});
 
-// router.put('/:id', (req, res) => {
-//   const updatedComment = CommentService.update(Number(req.params.id), req.body);
-//   if (!updatedComment) {
-//     return res.status(404).json({ message: 'Comment not found' });
-//   }
-//   res.json(updatedComment);
-// });
+commentController.post('/create', async (req: Request, res: Response, _next: NextFunction) => {
+  const commentData = req.body;
+  try {
+    const newComment = await CommentService.createComment(commentData);
+    return res.status(201).json(newComment);
+  } catch (error) {
+    return res.status(500).json({ message: 'Error adding new comment', error });
+  }
+});
 
-// router.delete('/:id', (req, res) => {
-//   const success = CommentService.delete(Number(req.params.id));
-//   if (!success) {
-//     return res.status(404).json({ message: 'Comment not found' });
-//   }
-//   res.status(204).send();
-// });
+commentController.put('/update/:id', async (req: Request, res: Response, _next: NextFunction) => {
+  const id = req.params.id;
+  const data = req.body;
+  try {
+    const updatedComment = await CommentService.updateComment(id, data);
+    if (updatedComment) {
+      return res.status(200).json(updatedComment);
+    } else {
+      return res.status(404).json({ message: `Comment with id ${id} not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Error updating comment', error });
+  }
+});
 
-export default router;
+commentController.delete('/delete/:id', async (req: Request, res: Response, _next: NextFunction) => {
+  const id = req.params.id;
+  try {
+    const deletedComment = await CommentService.deleteComment(id);
+    if (deletedComment) {
+      return res.status(200).json(deletedComment);
+    } else {
+      return res.status(404).json({ message: `Comment with id ${id} not found` });
+    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Error deleting comment', error });
+  }
+});
+
+export { commentController };

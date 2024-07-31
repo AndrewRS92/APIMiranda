@@ -1,30 +1,69 @@
-import User from '../models/User';
+import UserModel from '../models/User';
+import { User as UserType } from '../interfaces/user';
 
 class UserService {
-  async createUser(userData: any) {
-    const user = new User(userData);
-    return await user.save();
+  static async add(userData: UserType): Promise<UserType> {
+    try {
+      const newUser = new UserModel({
+        ...userData,
+        start_date: userData.start_date.toString() // Convertir Date a cadena
+      });
+      const savedUser = await newUser.save();
+      return savedUser.toObject() as UserType;
+    } catch (error) {
+      console.error('Error adding user:', error);
+      throw new Error('Error adding user');
+    }
   }
 
-  async getUsers() {
-    return await User.find();
+  static async fetchAll(): Promise<UserType[]> {
+    try {
+      const users = await UserModel.find().exec();
+      return users.map(user => user.toObject()) as UserType[];
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      throw new Error('Error fetching users');
+    }
   }
 
-  async getUserById(id: string) {
-    return await User.findById(id);
+  static async getUserById(id: string): Promise<UserType> {
+    try {
+      const user = await UserModel.findById(id).exec();
+      if (!user) {
+        throw new Error(`User with id ${id} not found`);
+      }
+      return user.toObject() as UserType;
+    } catch (error) {
+      console.error(`Error fetching user #${id}:`, error);
+      throw new Error(`Error fetching user #${id}`);
+    }
   }
 
-  async getUserByEmail(email: string) {
-    return await User.findOne({ email });
+  static async updateUser(id: string, userData: Partial<UserType>): Promise<UserType> {
+    try {
+      const updatedUser = await UserModel.findByIdAndUpdate(id, userData, { new: true }).exec();
+      if (!updatedUser) {
+        throw new Error(`User with id ${id} not found`);
+      }
+      return updatedUser.toObject() as UserType;
+    } catch (error) {
+      console.error(`Error updating user #${id}:`, error);
+      throw new Error(`Error updating user #${id}`);
+    }
   }
 
-  async updateUser(id: string, updateData: any) {
-    return await User.findByIdAndUpdate(id, updateData, { new: true });
-  }
-
-  async deleteUser(id: string) {
-    return await User.findByIdAndDelete(id);
+  static async deleteUser(id: string): Promise<UserType> {
+    try {
+      const deletedUser = await UserModel.findByIdAndDelete(id).exec();
+      if (!deletedUser) {
+        throw new Error(`User with id ${id} not found`);
+      }
+      return deletedUser.toObject() as UserType;
+    } catch (error) {
+      console.error(`Error deleting user #${id}:`, error);
+      throw new Error(`Error deleting user #${id}`);
+    }
   }
 }
 
-export default new UserService();
+export default UserService;

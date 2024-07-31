@@ -1,26 +1,66 @@
-import Comment from '../models/CommentsData';
+import CommentModel from '../models/CommentsData';
+import { Comment as CommentType } from '../interfaces/comment';
 
 class CommentService {
-  async createComment(commentData: any) {
-    const comment = new Comment(commentData);
-    return await comment.save();
+  static async createComment(commentData: CommentType): Promise<CommentType> {
+    try {
+      const newComment = new CommentModel(commentData);
+      const savedComment = await newComment.save();
+      return savedComment.toObject() as CommentType;
+    } catch (error) {
+      console.error('Error adding new comment:', error);
+      throw new Error('Error adding new comment');
+    }
   }
 
-  async getComments() {
-    return await Comment.find();
+  static async getComments(): Promise<CommentType[]> {
+    try {
+      const comments = await CommentModel.find().exec();
+      return comments.map(comment => comment.toObject()) as CommentType[];
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+      throw new Error('Error fetching comments');
+    }
   }
 
-  async getCommentById(id: string) {
-    return await Comment.findById(id);
+  static async getCommentById(id: string): Promise<CommentType> {
+    try {
+      const comment = await CommentModel.findById(id).exec();
+      if (!comment) {
+        throw new Error(`Comment with id ${id} not found`);
+      }
+      return comment.toObject() as CommentType;
+    } catch (error) {
+      console.error(`Error fetching comment #${id}:`, error);
+      throw new Error(`Error fetching comment #${id}`);
+    }
   }
 
-  async updateComment(id: string, updateData: any) {
-    return await Comment.findByIdAndUpdate(id, updateData, { new: true });
+  static async updateComment(id: string, commentData: Partial<CommentType>): Promise<CommentType> {
+    try {
+      const updatedComment = await CommentModel.findByIdAndUpdate(id, commentData, { new: true }).exec();
+      if (!updatedComment) {
+        throw new Error(`Error updating comment #${id}`);
+      }
+      return updatedComment.toObject() as CommentType;
+    } catch (error) {
+      console.error(`Error updating comment #${id}:`, error);
+      throw new Error(`Error updating comment #${id}`);
+    }
   }
 
-  async deleteComment(id: string) {
-    return await Comment.findByIdAndDelete(id);
+  static async deleteComment(id: string): Promise<CommentType> {
+    try {
+      const deletedComment = await CommentModel.findByIdAndDelete(id).exec();
+      if (!deletedComment) {
+        throw new Error(`Error deleting comment #${id}`);
+      }
+      return deletedComment.toObject() as CommentType;
+    } catch (error) {
+      console.error(`Error deleting comment #${id}:`, error);
+      throw new Error(`Error deleting comment #${id}`);
+    }
   }
 }
 
-export default new CommentService();
+export default CommentService;

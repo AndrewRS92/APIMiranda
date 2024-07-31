@@ -26,7 +26,7 @@ const userSchema = new Schema<IUser>({
   password: { type: String, required: true },
 });
 
-// Middleware para encriptar la contraseña antes de guardarla
+
 userSchema.pre<IUser>('save', async function (next) {
   if (!this.isModified('password')) return next();
   
