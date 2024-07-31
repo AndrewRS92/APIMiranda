@@ -6,10 +6,10 @@ import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
-import roomsController from './controllers/roomsController';
-import {bookingController} from './controllers/bookingsController';
-import userController from './controllers/userController';
-import commentController from './controllers/commentController';
+import {roomsController} from './controllers/roomsController';
+import { bookingController } from './controllers/bookingsController';
+import { userController} from './controllers/userController';
+import {commentController}  from './controllers/commentController';
 import User from './models/User';
 import { authenticateToken as authMiddleware } from './middleware/auth';
 
@@ -25,13 +25,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Conexión a la base de datos
+
 mongoose.connect('mongodb://localhost:27017/apimiranda')
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('Failed to connect to MongoDB', err));
 
 
-// Ruta de inicio de sesión
 app.post('/login', async (req: Request, res: Response, _next: NextFunction) => {
   const { email, password } = req.body;
   try {
@@ -47,19 +46,19 @@ app.post('/login', async (req: Request, res: Response, _next: NextFunction) => {
 
     const token = jwt.sign({ userId: user._id }, process.env.KEY || 'NotFound');
     res.cookie('authorization', token, { httpOnly: true });
-    return res.json({login:'funciona'});
+    return res.json({ login: 'funciona' });
   } catch (error: any) {
     return res.status(500).json({ error: error.message });
   }
 });
 
-// Ruta de cierre de sesión
+
 app.post('/logout', (_req, res: Response) => {
   res.clearCookie('authorization');
   res.redirect('/');
 });
 
-// Rutas para Room
+
 app.use('/rooms', authMiddleware, roomsController);
 app.use('/bookings', authMiddleware, bookingController);
 app.use('/users', authMiddleware, userController);
