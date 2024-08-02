@@ -6,7 +6,7 @@ class UserService {
     try {
       const newUser = new UserModel({
         ...userData,
-        start_date: userData.start_date.toString() // Convertir Date a cadena
+        start_date: userData.start_date.toString() 
       });
       const savedUser = await newUser.save();
       return savedUser.toObject() as UserType;

@@ -26,9 +26,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 
-mongoose.connect('mongodb://localhost:27017/apimiranda')
+const mongoUri = process.env.MONGO_URI;
+if (!mongoUri) {
+  throw new Error('The MongoDB URI is not defined in .env file.');
+}
+
+mongoose.connect(mongoUri)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('Failed to connect to MongoDB', err));
+
 
 
 app.post('/login', async (req: Request, res: Response, _next: NextFunction) => {
