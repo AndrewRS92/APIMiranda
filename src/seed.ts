@@ -4,12 +4,19 @@ import Room from './models/Rooms';
 import Booking from './models/Booking';
 import User from './models/User';
 import Comment from './models/CommentsData';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const mongoUri = 'mongodb://localhost:27017/apimiranda';
+const mongoUri = process.env.MONGO_URI;
+if (!mongoUri) {
+  throw new Error('The MongoDB URI is not defined in .env file.');
+}
 
 mongoose.connect(mongoUri)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('Failed to connect to MongoDB', err));
+
+
 
 const seedRooms = async () => {
   for (let i = 0; i < 10; i++) {
@@ -65,7 +72,6 @@ const seedUsers = async () => {
     await user.save();
   }
 
-  // Crear el usuario específico
   const examplePassword = "1234";
   const specificUser = new User({
     name: 'Admin User',

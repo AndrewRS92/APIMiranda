@@ -13,10 +13,10 @@ class AuthService {
       throw new Error('User not found');
     }
     
-    console.log('User found:', user); // Log para verificar el usuario encontrado
+    console.log('User found:', user); 
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log('Password match:', isMatch); // Log para verificar la comparación de contraseñas
+    console.log('Password match:', isMatch); 
 
     if (!isMatch) {
       throw new Error('Invalid password');
